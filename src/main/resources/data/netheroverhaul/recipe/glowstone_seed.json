@@ -1,0 +1,6 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [{ "item": "netheroverhaul:glowstone_berry" }],
+  "result": { "id": "netheroverhaul:glowstone_seed", "count": 1 }
+}

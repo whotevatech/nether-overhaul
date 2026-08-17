@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "QCQ",
+    " T "
+  ],
+  "key": {
+    "G": { "item": "minecraft:gold_ingot" },
+    "Q": { "item": "minecraft:quartz" },
+    "C": { "item": "minecraft:compass" },
+    "T": { "item": "minecraft:ghast_tear" }
+  },
+  "result": { "id": "netheroverhaul:rift_seeker", "count": 1 }
+}

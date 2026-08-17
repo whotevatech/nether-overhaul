@@ -1,0 +1,17 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:sealed_flask" },
+    "title": "Water in Hell",
+    "description": "Obtain a Sealed Flask.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": false
+  },
+  "criteria": {
+    "has_flask": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": "netheroverhaul:sealed_flask" }] }
+    }
+  }
+}

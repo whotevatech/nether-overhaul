@@ -1,0 +1,117 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:stone_pickaxe" }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:stone_axe" }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:flint_and_steel" }
+      ]
+    },
+    {
+      "rolls": {
+        "type": "minecraft:uniform",
+        "min": 4,
+        "max": 6
+      },
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:cooked_porkchop",
+          "weight": 8,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 4, "max": 10 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:nether_wart",
+          "weight": 6,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 3, "max": 8 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_nugget",
+          "weight": 6,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 6, "max": 16 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:crimson_planks",
+          "weight": 5,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 8, "max": 16 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:coal",
+          "weight": 5,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 4, "max": 12 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:ice",
+          "weight": 4,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 6 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:glowstone",
+          "weight": 4,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 8 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:bone_meal",
+          "weight": 4,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 4, "max": 8 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:glowstone_seed",
+          "weight": 5,
+          "functions": [
+            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 6 }, "add": false }
+          ]
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:saddle",
+          "weight": 2
+        },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:potion",
+          "weight": 3,
+          "functions": [
+            { "function": "minecraft:set_potion", "id": "minecraft:fire_resistance" }
+          ]
+        }
+      ]
+    }
+  ]
+}

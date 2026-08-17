@@ -1,0 +1,14 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    " G ",
+    "GIG",
+    " G "
+  ],
+  "key": {
+    "G": { "item": "minecraft:glass_bottle" },
+    "I": { "item": "minecraft:ice" }
+  },
+  "result": { "id": "netheroverhaul:sealed_flask", "count": 1 }
+}

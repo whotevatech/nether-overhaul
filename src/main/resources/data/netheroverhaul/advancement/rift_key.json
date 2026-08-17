@@ -1,0 +1,23 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": {
+      "id": "netheroverhaul:rift_key"
+    },
+    "title": "Key to the Rift",
+    "description": "Find a Rift Key in a watchtower, hamlet or wither-ruin pit.",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_key": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": "netheroverhaul:rift_key" }
+        ]
+      }
+    }
+  }
+}

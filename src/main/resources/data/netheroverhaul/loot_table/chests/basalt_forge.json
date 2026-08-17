@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:chest",
+  "pools": [
+    {
+      "rolls": { "type": "minecraft:uniform", "min": 3, "max": 6 },
+      "entries": [
+        { "type": "minecraft:item", "name": "minecraft:iron_ingot", "weight": 8,
+          "functions": [{ "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 6 }, "add": false }] },
+        { "type": "minecraft:item", "name": "minecraft:gold_ingot", "weight": 6,
+          "functions": [{ "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 4 }, "add": false }] },
+        { "type": "minecraft:item", "name": "minecraft:magma_cream", "weight": 6,
+          "functions": [{ "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 5 }, "add": false }] },
+        { "type": "minecraft:item", "name": "minecraft:basalt", "weight": 5,
+          "functions": [{ "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 8, "max": 16 }, "add": false }] },
+        { "type": "minecraft:item", "name": "minecraft:blast_furnace", "weight": 2 },
+        { "type": "minecraft:item", "name": "netheroverhaul:recall_charm", "weight": 1 }
+      ]
+    }
+  ]
+}

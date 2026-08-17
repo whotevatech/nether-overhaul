@@ -1,0 +1,18 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": {
+      "id": "minecraft:end_portal_frame"
+    },
+    "title": "The Rift Opens",
+    "description": "Use a Rift Key. The Overworld will take you back.",
+    "frame": "challenge",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "used_key": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

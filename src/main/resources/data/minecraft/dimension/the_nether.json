@@ -1,0 +1,21 @@
+{
+  "type": "netheroverhaul:overhauled_nether",
+  "generator": {
+    "type": "netheroverhaul:overhauled",
+    "biome_source": {
+      "type": "netheroverhaul:layered",
+      "biomes": [
+        "minecraft:nether_wastes",
+        "minecraft:crimson_forest",
+        "minecraft:warped_forest",
+        "minecraft:soul_sand_valley",
+        "minecraft:basalt_deltas",
+        "netheroverhaul:ashen_swamp",
+        "netheroverhaul:wither_ruins",
+        "netheroverhaul:quartz_peaks",
+        "netheroverhaul:ember_fields",
+        "netheroverhaul:weeping_hollow"
+      ]
+    }
+  }
+}

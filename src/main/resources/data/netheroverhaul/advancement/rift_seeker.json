@@ -1,0 +1,17 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:rift_seeker" },
+    "title": "Needle in the Ash",
+    "description": "Craft or find a Rift Seeker.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_seeker": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": "netheroverhaul:rift_seeker" }] }
+    }
+  }
+}

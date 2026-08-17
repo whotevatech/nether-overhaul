@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "entries": [
+    "netheroverhaul:fortress_bonus",
+    "netheroverhaul:bastion_treasure",
+    "netheroverhaul:bastion_other",
+    "netheroverhaul:bastion_bridge",
+    "netheroverhaul:piglin_bonus"
+  ]
+}

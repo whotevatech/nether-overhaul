@@ -1,0 +1,17 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:recall_charm" },
+    "title": "Home Through the Ash",
+    "description": "Obtain a Recall Charm.",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_charm": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": { "items": [{ "items": "netheroverhaul:recall_charm" }] }
+    }
+  }
+}

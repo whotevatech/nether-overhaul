@@ -1,0 +1,21 @@
+{
+  "display": {
+    "icon": {
+      "id": "netheroverhaul:rift_key"
+    },
+    "title": "Sealed Below",
+    "description": "Wake in the Nether. The Overworld is locked until you find a Rift Key.",
+    "background": "minecraft:textures/gui/advancements/backgrounds/nether.png",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "nether": {
+      "trigger": "minecraft:changed_dimension",
+      "conditions": {
+        "to": "minecraft:the_nether"
+      }
+    }
+  }
+}
