@@ -26,6 +26,10 @@ public final class ModCreativeTabs {
                         output.accept(ModItems.GLOWSTONE_SEED.get());
                         output.accept(ModItems.GLOWSTONE_BERRY.get());
                         output.accept(ModItems.QUICK_SOUL_SAND.get());
+                        output.accept(ModItems.NETHER_IRON_ORE.get());
+                        output.accept(ModItems.NETHER_COPPER_ORE.get());
+                        output.accept(ModItems.NETHER_COAL_ORE.get());
+                        output.accept(ModItems.NETHER_REDSTONE_ORE.get());
                         output.accept(ModItems.NETHER_CREEPER_EGG.get());
                         output.accept(ModItems.NETHER_SPIDER_EGG.get());
                         output.accept(ModItems.NETHER_ZOMBIE_EGG.get());
@@ -46,6 +50,10 @@ public final class ModCreativeTabs {
         }
         if (event.getTabKey() == CreativeModeTabs.NATURAL_BLOCKS) {
             event.accept(ModItems.QUICK_SOUL_SAND.get());
+            event.accept(ModItems.NETHER_IRON_ORE.get());
+            event.accept(ModItems.NETHER_COPPER_ORE.get());
+            event.accept(ModItems.NETHER_COAL_ORE.get());
+            event.accept(ModItems.NETHER_REDSTONE_ORE.get());
         }
         if (event.getTabKey() == CreativeModeTabs.SPAWN_EGGS) {
             event.accept(ModItems.NETHER_CREEPER_EGG.get());

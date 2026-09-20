@@ -26,9 +26,9 @@ public final class NetherLore {
                 0,
                 List.of(
                         page("You woke in the Nether.\n\nThe Overworld is sealed. Portals will not take you home until you use a Rift Key."),
-                        page("Your camp has a lodestone compass, water cauldrons, a respawn anchor and a Sealed Flask. Right-click the flask on a cauldron to refill it."),
+                        page("Your camp has a lodestone compass, water cauldrons, a respawn anchor and a Sealed Flask. Right-click the flask on a cauldron to refill it. The chest has wool, flint and gravel: sleeping bag, knife, then smelt gravel to sand for glass."),
                         page("Search watchtowers, hamlets, wither pits, ghast nests, basalt forges, quartz shrines, obsidian wells, nether dungeons, blaze towers and fire towers. A Rift Seeker points to the nearest one."),
-                        page("Glowstone berries grow on soul sand and keep you fed. Watch for quick soul sand — it looks like the real thing and will swallow you. Fire-immune creepers, spiders and zombies hunt the wastes.\n\nThe rift is waiting.")
+                        page("Four soul soil makes a clay block. Iron, copper, coal and redstone hide in netherrack. Watch for quick soul sand — it looks like the real thing, sheds soul wisps, and will swallow you.\n\nThe rift is waiting.")
                 ),
                 true
         );

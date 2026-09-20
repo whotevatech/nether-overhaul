@@ -29,6 +29,7 @@ public final class NetherOverhaulConfig {
     public static final ModConfigSpec.IntValue FORGE_SPACING;
     public static final ModConfigSpec.IntValue SHRINE_SPACING;
     public static final ModConfigSpec.IntValue EXTRA_ORE_ATTEMPTS;
+    public static final ModConfigSpec.BooleanValue PACK_VANILLA_ORES;
 
     static {
         ModConfigSpec.Builder builder = new ModConfigSpec.Builder();
@@ -105,7 +106,10 @@ public final class NetherOverhaulConfig {
                 .defineInRange("shrineSpacing", 13, 6, 40);
         EXTRA_ORE_ATTEMPTS = builder
                 .comment("How many times per chunk to try placing a block from #netheroverhaul:extra_nether_ores.")
-                .defineInRange("extraOreAttempts", 16, 0, 64);
+                .defineInRange("extraOreAttempts", 24, 0, 64);
+        PACK_VANILLA_ORES = builder
+                .comment("Bake iron, copper, coal and redstone into netherrack so a sealed Nether has a mining loop.")
+                .define("packVanillaOres", true);
         builder.pop();
 
         SPEC = builder.build();

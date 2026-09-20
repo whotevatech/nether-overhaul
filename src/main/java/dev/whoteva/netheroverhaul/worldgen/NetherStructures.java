@@ -6,19 +6,35 @@ import dev.whoteva.netheroverhaul.block.ModBlocks;
 import dev.whoteva.netheroverhaul.entity.ModEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.level.WorldGenLevel;
+import net.minecraft.network.chat.Component;
+import net.minecraft.world.level.block.BedBlock;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.ChestBlock;
+import net.minecraft.world.level.block.DoorBlock;
+import net.minecraft.world.level.block.FenceGateBlock;
 import net.minecraft.world.level.block.LadderBlock;
 import net.minecraft.world.level.block.LanternBlock;
 import net.minecraft.world.level.block.LayeredCauldronBlock;
 import net.minecraft.world.level.block.RespawnAnchorBlock;
 import net.minecraft.world.level.block.StairBlock;
+import net.minecraft.world.level.block.TrapDoorBlock;
+import net.minecraft.world.level.block.WallSignBlock;
 import net.minecraft.world.level.block.entity.ChestBlockEntity;
+import net.minecraft.world.level.block.entity.SignBlockEntity;
+import net.minecraft.world.level.block.entity.SignText;
 import net.minecraft.world.level.block.entity.SpawnerBlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.BedPart;
+import net.minecraft.world.level.block.state.properties.DoubleBlockHalf;
+import net.minecraft.world.level.block.state.properties.DoorHingeSide;
+import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.storage.loot.LootTable;
 
 public final class NetherStructures {
@@ -27,44 +43,128 @@ public final class NetherStructures {
     }
 
     public static void placeSpawnCamp(WorldGenLevel level, BlockPos origin, long lootSeed) {
-        int radius = 3;
-        for (int x = -radius; x <= radius; x++) {
-            for (int z = -radius; z <= radius; z++) {
-                set(level, origin.offset(x, 0, z), Blocks.POLISHED_BLACKSTONE.defaultBlockState());
-                for (int y = 1; y <= 3; y++) {
-                    boolean wall = Math.abs(x) == radius || Math.abs(z) == radius;
-                    boolean door = z == radius && Math.abs(x) <= 1 && y <= 2;
-                    if (wall && !door) {
-                        set(level, origin.offset(x, y, z), Blocks.BLACKSTONE.defaultBlockState());
-                    } else {
+        int hut = 4;
+        int pad = 7;
+
+        for (int x = -pad; x <= pad; x++) {
+            for (int z = -pad; z <= pad; z++) {
+                set(level, origin.offset(x, -1, z), Blocks.BLACKSTONE.defaultBlockState());
+                boolean insideHut = Math.abs(x) <= hut && Math.abs(z) <= hut;
+                set(level, origin.offset(x, 0, z), (insideHut ? Blocks.POLISHED_BLACKSTONE : Blocks.BLACKSTONE).defaultBlockState());
+                if (!insideHut) {
+                    for (int y = 1; y <= 4; y++) {
                         set(level, origin.offset(x, y, z), Blocks.AIR.defaultBlockState());
                     }
                 }
-                set(level, origin.offset(x, 4, z), Blocks.POLISHED_BLACKSTONE_SLAB.defaultBlockState());
             }
         }
 
-        set(level, origin.offset(0, 0, 0), Blocks.LODESTONE.defaultBlockState());
-        set(level, origin.offset(0, 3, 0), Blocks.SOUL_LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
-        placeChest(level, origin.offset(0, 1, -2), lootSeed, ModLoot.SPAWN_CAMP);
-        set(level, origin.offset(-2, 1, -2), Blocks.CRAFTING_TABLE.defaultBlockState());
-        set(level, origin.offset(2, 1, -2), Blocks.FURNACE.defaultBlockState());
-        set(level, origin.offset(-2, 1, 2), Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3));
-        set(level, origin.offset(2, 1, 2), Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3));
-        set(level, origin.offset(0, 1, 2), Blocks.RESPAWN_ANCHOR.defaultBlockState().setValue(RespawnAnchorBlock.CHARGE, 2));
-        set(level, origin.offset(0, 1, radius + 2), Blocks.SOUL_CAMPFIRE.defaultBlockState());
+        for (int x = -hut; x <= hut; x++) {
+            for (int z = -hut; z <= hut; z++) {
+                boolean wall = Math.abs(x) == hut || Math.abs(z) == hut;
+                boolean door = z == hut && (x == 0 || x == -1);
+                boolean window = !door && ((Math.abs(x) == hut && z == 0) || (Math.abs(z) == hut && x == 0));
+                for (int y = 1; y <= 4; y++) {
+                    BlockPos pos = origin.offset(x, y, z);
+                    if (wall && door && y <= 2) {
+                        set(level, pos, Blocks.AIR.defaultBlockState());
+                    } else if (wall && window && y == 2) {
+                        set(level, pos, Blocks.IRON_BARS.defaultBlockState());
+                    } else if (wall) {
+                        boolean pillar = Math.abs(x) == hut && Math.abs(z) == hut;
+                        set(level, pos, (pillar ? Blocks.POLISHED_BLACKSTONE : Blocks.BLACKSTONE).defaultBlockState());
+                    } else {
+                        set(level, pos, Blocks.AIR.defaultBlockState());
+                    }
+                }
+                boolean glow = (x == 0 && z == 0) || (Math.abs(x) == hut - 1 && Math.abs(z) == hut - 1);
+                set(level, origin.offset(x, 5, z), glow
+                        ? Blocks.GLOWSTONE.defaultBlockState()
+                        : Blocks.POLISHED_BLACKSTONE.defaultBlockState());
+            }
+        }
+
+        set(level, origin, Blocks.LODESTONE.defaultBlockState());
+        set(level, origin.offset(0, 4, 0), Blocks.SOUL_LANTERN.defaultBlockState().setValue(LanternBlock.HANGING, true));
+
+        placeChest(level, origin.offset(0, 1, -3), lootSeed, ModLoot.SPAWN_CAMP, Direction.SOUTH);
+        placeCampSign(level, origin.offset(1, 2, -3));
+        set(level, origin.offset(-3, 1, -3), Blocks.CRAFTING_TABLE.defaultBlockState());
+        set(level, origin.offset(-2, 1, -3), Blocks.STONECUTTER.defaultBlockState());
+        set(level, origin.offset(2, 1, -3), Blocks.FURNACE.defaultBlockState());
+        set(level, origin.offset(3, 1, -3), Blocks.BARREL.defaultBlockState());
+        set(level, origin.offset(-3, 1, 0), Blocks.GRINDSTONE.defaultBlockState());
+        set(level, origin.offset(3, 1, 0), Blocks.RESPAWN_ANCHOR.defaultBlockState().setValue(RespawnAnchorBlock.CHARGE, 2));
+        set(level, origin.offset(-3, 1, 2), Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3));
+        set(level, origin.offset(3, 1, 2), Blocks.WATER_CAULDRON.defaultBlockState().setValue(LayeredCauldronBlock.LEVEL, 3));
+        set(level, origin.offset(-3, 1, 3), Blocks.COMPOSTER.defaultBlockState());
+        set(level, origin.offset(-2, 1, 3), Blocks.WHITE_WOOL.defaultBlockState());
+        set(level, origin.offset(-1, 1, 3), Blocks.WHITE_WOOL.defaultBlockState());
+        set(level, origin.offset(-2, 2, 3), Blocks.WHITE_CARPET.defaultBlockState());
+        set(level, origin.offset(-1, 2, 3), Blocks.WHITE_CARPET.defaultBlockState());
+        placeOptionalSleepingBag(level, origin.offset(-2, 1, 2), Direction.EAST);
+
+        placeDoor(level, origin.offset(-1, 1, hut), Direction.SOUTH, DoorHingeSide.LEFT);
+        placeDoor(level, origin.offset(0, 1, hut), Direction.SOUTH, DoorHingeSide.RIGHT);
+        set(level, origin.offset(-1, 0, hut + 1), Blocks.POLISHED_BLACKSTONE_STAIRS.defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH));
+        set(level, origin.offset(0, 0, hut + 1), Blocks.POLISHED_BLACKSTONE_STAIRS.defaultBlockState().setValue(StairBlock.FACING, Direction.SOUTH));
+        set(level, origin.offset(0, 1, hut + 3), Blocks.SOUL_CAMPFIRE.defaultBlockState());
+
+        BlockState ladder = Blocks.LADDER.defaultBlockState().setValue(LadderBlock.FACING, Direction.WEST);
+        for (int y = 1; y <= 4; y++) {
+            set(level, origin.offset(3, y, 3), ladder);
+        }
+        set(level, origin.offset(3, 5, 3), Blocks.CRIMSON_TRAPDOOR.defaultBlockState()
+                .setValue(TrapDoorBlock.FACING, Direction.WEST)
+                .setValue(TrapDoorBlock.HALF, Half.TOP)
+                .setValue(TrapDoorBlock.OPEN, true));
+        set(level, origin.offset(2, 6, -3), Blocks.NETHER_BRICKS.defaultBlockState());
+        set(level, origin.offset(2, 7, -3), Blocks.SOUL_CAMPFIRE.defaultBlockState());
 
         RandomSource random = RandomSource.create(lootSeed);
-        for (int x = 5; x <= 7; x++) {
-            for (int z = -1; z <= 1; z++) {
-                set(level, origin.offset(x, 0, z), Blocks.SOUL_SAND.defaultBlockState());
-                if (x == 6 && z == 0) {
-                    placeGlowstoneBerryBush(level, origin.offset(x, 1, z), random);
+        int farmMin = hut + 3;
+        int farmMax = hut + 6;
+        for (int x = farmMin; x <= farmMax; x++) {
+            for (int z = -2; z <= 2; z++) {
+                boolean fence = x == farmMin || x == farmMax || z == -2 || z == 2;
+                boolean gate = x == farmMin && z == 0;
+                if (fence && gate) {
+                    set(level, origin.offset(x, 1, z), Blocks.CRIMSON_FENCE_GATE.defaultBlockState()
+                            .setValue(FenceGateBlock.FACING, Direction.WEST));
+                } else if (fence) {
+                    set(level, origin.offset(x, 1, z), Blocks.NETHER_BRICK_FENCE.defaultBlockState());
                 } else {
-                    set(level, origin.offset(x, 1, z), Blocks.NETHER_WART.defaultBlockState());
+                    set(level, origin.offset(x, 0, z), Blocks.SOUL_SAND.defaultBlockState());
+                    if (x == farmMin + 2 && z == 0) {
+                        placeGlowstoneBerryBush(level, origin.offset(x, 1, z), random);
+                    } else {
+                        set(level, origin.offset(x, 1, z), Blocks.NETHER_WART.defaultBlockState());
+                    }
                 }
             }
         }
+        set(level, origin.offset(farmMax, 2, 0), Blocks.SOUL_LANTERN.defaultBlockState());
+    }
+
+    private static void placeDoor(WorldGenLevel level, BlockPos lower, Direction facing, DoorHingeSide hinge) {
+        BlockState state = Blocks.CRIMSON_DOOR.defaultBlockState()
+                .setValue(DoorBlock.FACING, facing)
+                .setValue(DoorBlock.HINGE, hinge)
+                .setValue(DoorBlock.HALF, DoubleBlockHalf.LOWER);
+        set(level, lower, state);
+        set(level, lower.above(), state.setValue(DoorBlock.HALF, DoubleBlockHalf.UPPER));
+    }
+
+    private static void placeOptionalSleepingBag(WorldGenLevel level, BlockPos foot, Direction facing) {
+        BuiltInRegistries.BLOCK.getOptional(ResourceLocation.parse("comforts:sleeping_bag_white")).ifPresent(block -> {
+            BlockState base = block.defaultBlockState();
+            if (!base.hasProperty(BedBlock.FACING) || !base.hasProperty(BedBlock.PART)) {
+                return;
+            }
+            BlockPos head = foot.relative(facing);
+            set(level, foot, base.setValue(BedBlock.FACING, facing).setValue(BedBlock.PART, BedPart.FOOT));
+            set(level, head, base.setValue(BedBlock.FACING, facing).setValue(BedBlock.PART, BedPart.HEAD));
+        });
     }
 
     public static void placeWatchtower(WorldGenLevel level, BlockPos origin, RandomSource random, long lootSeed) {
@@ -499,8 +599,26 @@ public final class NetherStructures {
         }
     }
 
+    private static void placeCampSign(WorldGenLevel level, BlockPos pos) {
+        set(level, pos, Blocks.CRIMSON_WALL_SIGN.defaultBlockState().setValue(WallSignBlock.FACING, Direction.SOUTH));
+        if (level.getBlockEntity(pos) instanceof SignBlockEntity sign) {
+            SignText text = new SignText()
+                    .setMessage(0, Component.literal("CAMP"))
+                    .setMessage(1, Component.literal("Lodestone"))
+                    .setMessage(2, Component.literal("under floor"))
+                    .setColor(DyeColor.ORANGE)
+                    .setHasGlowingText(true);
+            sign.setText(text, true);
+            sign.setWaxed(true);
+        }
+    }
+
     private static void placeChest(WorldGenLevel level, BlockPos pos, long lootSeed, ResourceKey<LootTable> table) {
-        set(level, pos, Blocks.CHEST.defaultBlockState());
+        placeChest(level, pos, lootSeed, table, Direction.NORTH);
+    }
+
+    private static void placeChest(WorldGenLevel level, BlockPos pos, long lootSeed, ResourceKey<LootTable> table, Direction facing) {
+        set(level, pos, Blocks.CHEST.defaultBlockState().setValue(ChestBlock.FACING, facing));
         if (level.getBlockEntity(pos) instanceof ChestBlockEntity chest) {
             chest.setLootTable(table, lootSeed);
         }

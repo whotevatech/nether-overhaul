@@ -1,0 +1,6 @@
+{
+  "variants": {
+    "lit=false": { "model": "netheroverhaul:block/nether_redstone_ore" },
+    "lit=true": { "model": "netheroverhaul:block/nether_redstone_ore" }
+  }
+}

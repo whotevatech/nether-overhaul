@@ -1,5 +1,19 @@
 # Changelog
 
+## 1.3.4
+
+- Spawn camp is a real hut: yard, doors, windows, glowstone roof, lookout hatch, fenced wart farm, stonecutter, grindstone, barrel, wool bedroll.
+- Comforts sleeping bag is placed at camp when that mod is loaded.
+
+## 1.3.3
+
+- Restore nether iron, copper, coal and redstone baked into netherrack (`packVanillaOres`, on by default).
+- Smelt or blast gravel into sand. Four soul soil crafts a clay block. Piglins can barter gravel, sand, glass and clay.
+- Spawn camp chest always includes wool, flint, gravel and string. Crimson sign marks the lodestone under the floor.
+- First-join teleport runs as soon as the player loads, so the Overworld flash is shorter.
+- Quick soul sand sheds soul wisps so it is no longer identical to real soul sand.
+- Extra-ore attempts default to 24. Drop duplicate Mekanism lead/uranium and deepslate extra ores from the tag.
+
 ## 1.3.1
 
 - Port original Nether Overload fire towers (nether-brick trunk, fire-tipped branches).

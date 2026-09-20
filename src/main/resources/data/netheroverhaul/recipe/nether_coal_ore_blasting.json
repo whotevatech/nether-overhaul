@@ -1,0 +1,8 @@
+{
+  "type": "minecraft:blasting",
+  "category": "misc",
+  "cookingtime": 100,
+  "experience": 0.1,
+  "ingredient": { "item": "netheroverhaul:nether_coal_ore" },
+  "result": { "id": "minecraft:coal" }
+}

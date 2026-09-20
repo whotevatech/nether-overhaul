@@ -124,6 +124,20 @@ public class OverhauledNetherChunkGenerator extends ChunkGenerator {
             if (ore < 34) {
                 return Blocks.MAGMA_BLOCK.defaultBlockState();
             }
+            if (NetherOverhaulConfig.PACK_VANILLA_ORES.get()) {
+                if (ore < 42) {
+                    return ModBlocks.NETHER_IRON_ORE.get().defaultBlockState();
+                }
+                if (ore < 50) {
+                    return ModBlocks.NETHER_COPPER_ORE.get().defaultBlockState();
+                }
+                if (ore < 55) {
+                    return ModBlocks.NETHER_COAL_ORE.get().defaultBlockState();
+                }
+                if (ore < 58) {
+                    return ModBlocks.NETHER_REDSTONE_ORE.get().defaultBlockState();
+                }
+            }
             return Blocks.NETHERRACK.defaultBlockState();
         }
         if (y <= lava) {

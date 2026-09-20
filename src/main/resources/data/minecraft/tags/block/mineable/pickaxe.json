@@ -1,0 +1,9 @@
+{
+  "replace": false,
+  "values": [
+    "netheroverhaul:nether_iron_ore",
+    "netheroverhaul:nether_copper_ore",
+    "netheroverhaul:nether_coal_ore",
+    "netheroverhaul:nether_redstone_ore"
+  ]
+}

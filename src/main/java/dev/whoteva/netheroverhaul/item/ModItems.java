@@ -51,6 +51,18 @@ public final class ModItems {
     public static final DeferredItem<BlockItem> QUICK_SOUL_SAND = ITEMS.registerSimpleBlockItem(
             "quick_soul_sand", ModBlocks.QUICK_SOUL_SAND);
 
+    public static final DeferredItem<BlockItem> NETHER_IRON_ORE = ITEMS.registerSimpleBlockItem(
+            "nether_iron_ore", ModBlocks.NETHER_IRON_ORE);
+
+    public static final DeferredItem<BlockItem> NETHER_COPPER_ORE = ITEMS.registerSimpleBlockItem(
+            "nether_copper_ore", ModBlocks.NETHER_COPPER_ORE);
+
+    public static final DeferredItem<BlockItem> NETHER_COAL_ORE = ITEMS.registerSimpleBlockItem(
+            "nether_coal_ore", ModBlocks.NETHER_COAL_ORE);
+
+    public static final DeferredItem<BlockItem> NETHER_REDSTONE_ORE = ITEMS.registerSimpleBlockItem(
+            "nether_redstone_ore", ModBlocks.NETHER_REDSTONE_ORE);
+
     public static final DeferredItem<SpawnEggItem> NETHER_CREEPER_EGG = ITEMS.register(
             "nether_creeper_spawn_egg",
             () -> new SpawnEggItem(ModEntities.NETHER_CREEPER.get(), 0x4A1C12, 0xE07020, new Item.Properties()));

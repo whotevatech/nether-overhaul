@@ -11,6 +11,7 @@ import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.level.Level;
 import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.neoforge.event.entity.EntityJoinLevelEvent;
 import net.neoforged.neoforge.event.entity.EntityTravelToDimensionEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
@@ -31,6 +32,30 @@ public final class SpawnAndLockEvents {
             return;
         }
         NetherSpawn.sendToNether(player, true);
+    }
+
+    @SubscribeEvent
+    public static void onJoinLevel(EntityJoinLevelEvent event) {
+        if (!(event.getEntity() instanceof ServerPlayer player)) {
+            return;
+        }
+        if (event.getLevel().isClientSide()) {
+            return;
+        }
+        if (!NetherOverhaulConfig.SPAWN_IN_NETHER.get()) {
+            return;
+        }
+        if (ModAttachments.hasNetherSpawned(player)) {
+            return;
+        }
+        if (player.level().dimension() != Level.OVERWORLD) {
+            return;
+        }
+        player.server.execute(() -> {
+            if (!ModAttachments.hasNetherSpawned(player)) {
+                NetherSpawn.sendToNether(player, true);
+            }
+        });
     }
 
     @SubscribeEvent

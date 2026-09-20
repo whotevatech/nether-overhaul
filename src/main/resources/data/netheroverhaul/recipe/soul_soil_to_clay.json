@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "S": { "item": "minecraft:soul_soil" }
+  },
+  "pattern": [
+    "SS",
+    "SS"
+  ],
+  "result": { "id": "minecraft:clay", "count": 1 }
+}

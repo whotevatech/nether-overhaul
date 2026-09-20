@@ -2,6 +2,8 @@ package dev.whoteva.netheroverhaul.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
@@ -24,7 +26,7 @@ public class QuickSoulSandBlock extends Block {
 
     public QuickSoulSandBlock() {
         super(BlockBehaviour.Properties.of()
-                .mapColor(MapColor.COLOR_BROWN)
+                .mapColor(MapColor.COLOR_BLACK)
                 .strength(0.6F)
                 .sound(SoundType.SOUL_SAND)
                 .isSuffocating((state, level, pos) -> false)
@@ -49,5 +51,19 @@ public class QuickSoulSandBlock extends Block {
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         entity.makeStuckInBlock(state, new Vec3(0.25D, 0.05D, 0.25D));
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
+        if (random.nextInt(3) == 0) {
+            level.addParticle(
+                    ParticleTypes.SOUL,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 0.85D,
+                    pos.getZ() + random.nextDouble(),
+                    0.0D,
+                    0.04D,
+                    0.0D);
+        }
     }
 }

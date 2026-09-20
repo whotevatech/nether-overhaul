@@ -20,19 +20,34 @@ import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Finds a standable nether column, builds a starter camp, and moves the player there.
  */
 public final class NetherSpawn {
 
+    private static final Set<UUID> SPAWNING = ConcurrentHashMap.newKeySet();
+
     private NetherSpawn() {
     }
 
     public static void sendToNether(ServerPlayer player, boolean firstJoin) {
+        if (firstJoin && (ModAttachments.hasNetherSpawned(player) || !SPAWNING.add(player.getUUID()))) {
+            return;
+        }
+
         ServerLevel nether = player.server.getLevel(Level.NETHER);
         if (nether == null) {
+            if (firstJoin) {
+                SPAWNING.remove(player.getUUID());
+            }
             return;
+        }
+
+        if (firstJoin) {
+            ModAttachments.markNetherSpawned(player);
         }
 
         BlockPos spawn = findSafe(nether);
@@ -55,7 +70,6 @@ public final class NetherSpawn {
         player.setRespawnPosition(Level.NETHER, spawn, player.getYRot(), true, false);
 
         if (firstJoin) {
-            ModAttachments.markNetherSpawned(player);
             ModAttachments.setCampPos(player, spawn);
             int fireTicks = NetherOverhaulConfig.SPAWN_FIRE_RESISTANCE_TICKS.get();
             if (fireTicks > 0) {
@@ -71,6 +85,7 @@ public final class NetherSpawn {
                 player.getInventory().add(new ItemStack(ModItems.SEALED_FLASK.get()));
             }
             NetherLore.showTitle(player, "title.netheroverhaul.sealed", "subtitle.netheroverhaul.sealed");
+            SPAWNING.remove(player.getUUID());
         }
     }
 

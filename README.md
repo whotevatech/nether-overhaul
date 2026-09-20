@@ -16,14 +16,14 @@ Use a **new world** after updating. Worldgen, camp layout and structure grids do
 
 ## What it does
 
-- **Nether spawn camp.** First join builds a blackstone shelter with crafting table, furnace, water cauldrons, charged respawn anchor, lodestone, wart patch, starter chest, lore book, camp compass, Sealed Flask and 60s fire resistance.
+- **Nether spawn camp.** First join builds a blackstone shelter with crafting table, furnace, water cauldrons, charged respawn anchor, lodestone (signed), wart patch, starter chest (tools, wool, flint, gravel, string), lore book, camp compass, Sealed Flask and 60s fire resistance.
 - **Overworld lock.** Portals stay sealed until you use a Rift Key. Creative and operators bypass this by default. Locked portal spam is throttled.
 - **Keep-inventory until unlock.** Deaths before the rift opens keep items and XP (config).
 - **256-block Nether.** Floor, roof, pillars, lava sea and ravines. Vanilla nether biomes plus Ashen Swamp, Wither Ruins, Quartz Peaks, Ember Fields and Weeping Hollow. Water can be placed (this dimension is not ultra-warm) so cobble and potions are possible.
 - **Structures.** Watchtowers, hamlets, wither-ruin pits, ghast nests, basalt forges, quartz shrines, obsidian wells, nether dungeons, fire rings, original-style blaze towers and fire towers. Fortresses and bastions can also generate in the new biomes.
 - **Original Nether Overload extras.** Glowstone berries grow on soul sand. Quick soul sand looks like soul sand but traps you like cobweb. Fire-immune nether creepers, spiders and zombies spawn in the wastes. Wither trees and glowstone trees decorate ruins and quartz peaks.
 - **Tools.** Rift Seeker (nearest structure), Recall Charm (return to camp), Sealed Flask (fill cauldrons / place water).
-- **Pack ores.** `#netheroverhaul:extra_nether_ores` optionally includes Mekanism, AE2, Immersive Engineering, Create, Thermal, Modern Industrialization, Mystical Agriculture, Occultism, Powah and others. Missing mods are skipped.
+- **Pack ores.** Iron, copper, coal and redstone generate in netherrack. `#netheroverhaul:extra_nether_ores` optionally includes Mekanism, AE2, Immersive Engineering, Create, Thermal, Modern Industrialization, Mystical Agriculture, Occultism, Powah and others. Missing mods are skipped. Gravel smelts to sand; four soul soil crafts clay.
 - **Vanilla injects.** Fortress / bastion chests and piglin barters can roll this mod's items.
 - **Quest hook.** Dummy scoreboard `netheroverhaul_rift` is 1 after unlock (FTB Quests / KubeJS).
 
@@ -55,7 +55,7 @@ A Rift Key can also be crafted from a nether star, ghast tear, two eyes of ender
 gradlew.bat build
 ```
 
-The jar lands in `build/libs/netheroverhaul-neoforge-1.21.1-1.3.1.jar`.
+The jar lands in `build/libs/netheroverhaul-neoforge-1.21.1-1.3.3.jar`.
 
 ## Licence
 
