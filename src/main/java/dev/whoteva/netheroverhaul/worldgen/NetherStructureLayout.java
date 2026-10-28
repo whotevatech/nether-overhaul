@@ -22,9 +22,10 @@ public final class NetherStructureLayout {
         SHRINE("quartz shrine"),
         WELL("obsidian well"),
         DUNGEON("nether dungeon"),
-        RING("fire ring"),
+        RING("ash pyre"),
         BLAZE("blaze tower"),
-        FIRE_TOWER("fire tower");
+        FIRE_TOWER("fire tower"),
+        ALTAR("rift altar");
 
         private final String label;
 
@@ -69,20 +70,23 @@ public final class NetherStructureLayout {
         if (matches(pos, NetherOverhaulConfig.SHRINE_SPACING.get(), 4, 9)) {
             return Kind.SHRINE;
         }
-        if (matches(pos, 15, 8, 2)) {
+        if (matches(pos, NetherOverhaulConfig.WELL_SPACING.get(), 8, 2)) {
             return Kind.WELL;
         }
-        if (matches(pos, 16, 3, 6)) {
+        if (matches(pos, NetherOverhaulConfig.DUNGEON_SPACING.get(), 3, 6)) {
             return Kind.DUNGEON;
         }
-        if (matches(pos, 9, 0, 5)) {
+        if (matches(pos, NetherOverhaulConfig.RING_SPACING.get(), 0, 5)) {
             return Kind.RING;
         }
-        if (matches(pos, 12, 7, 4)) {
+        if (matches(pos, NetherOverhaulConfig.BLAZE_SPACING.get(), 7, 4)) {
             return Kind.BLAZE;
         }
-        if (matches(pos, 8, 2, 1)) {
+        if (matches(pos, NetherOverhaulConfig.FIRE_TOWER_SPACING.get(), 2, 1)) {
             return Kind.FIRE_TOWER;
+        }
+        if (NetherOverhaulConfig.GENERATE_RIFT_ALTARS.get() && matches(pos, NetherOverhaulConfig.ALTAR_SPACING.get(), 7, 11)) {
+            return Kind.ALTAR;
         }
         return null;
     }

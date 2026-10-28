@@ -1,0 +1,21 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:glowstone_berry" },
+    "title": "Light in the Roots",
+    "description": "Harvest a glowstone berry from soul sand.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_berry": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": "netheroverhaul:glowstone_berry" }
+        ]
+      }
+    }
+  }
+}

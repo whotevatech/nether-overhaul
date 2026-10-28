@@ -1,0 +1,16 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:quick_soul_sand" },
+    "title": "It Looked Like Soul Sand",
+    "description": "Step in quick soul sand. The cracks give it away, if you look.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

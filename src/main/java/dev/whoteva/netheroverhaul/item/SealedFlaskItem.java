@@ -1,5 +1,6 @@
 package dev.whoteva.netheroverhaul.item;
 
+import dev.whoteva.netheroverhaul.NetherOverhaulConfig;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
@@ -44,7 +45,7 @@ public class SealedFlaskItem extends Item {
         BlockPos place = pos.relative(context.getClickedFace());
         if (level.getBlockState(place).isAir()) {
             if (!level.isClientSide) {
-                if (level.dimensionType().ultraWarm()) {
+                if (!NetherOverhaulConfig.FLASK_PLACES_WATER.get() || level.dimensionType().ultraWarm()) {
                     if (context.getPlayer() != null) {
                         context.getPlayer().displayClientMessage(Component.translatable("message.netheroverhaul.flask_cauldron"), true);
                     }
@@ -53,7 +54,7 @@ public class SealedFlaskItem extends Item {
                 level.setBlock(place, Blocks.WATER.defaultBlockState(), 3);
                 level.playSound(null, place, SoundEvents.BUCKET_EMPTY, SoundSource.BLOCKS, 0.8F, 1.0F);
                 if (context.getPlayer() != null) {
-                    context.getPlayer().getCooldowns().addCooldown(this, 40);
+                    context.getPlayer().getCooldowns().addCooldown(this, NetherOverhaulConfig.FLASK_WATER_COOLDOWN_TICKS.get());
                 }
             }
             return InteractionResult.sidedSuccess(level.isClientSide);

@@ -4,6 +4,7 @@ import com.mojang.serialization.MapCodec;
 import dev.whoteva.netheroverhaul.block.ModBlocks;
 import dev.whoteva.netheroverhaul.command.ModCommands;
 import dev.whoteva.netheroverhaul.condition.RiftKeyCraftingCondition;
+import dev.whoteva.netheroverhaul.condition.RiftShardCraftingCondition;
 import dev.whoteva.netheroverhaul.entity.ModEntities;
 import dev.whoteva.netheroverhaul.event.QolEvents;
 import dev.whoteva.netheroverhaul.event.SpawnAndLockEvents;
@@ -41,12 +42,14 @@ public final class NetherOverhaul {
         CHUNK_GENERATORS.register("overhauled", () -> OverhauledNetherChunkGenerator.CODEC);
         BIOME_SOURCES.register("layered", () -> OverhauledNetherBiomeSource.CODEC);
         CONDITION_CODECS.register("rift_key_crafting", () -> RiftKeyCraftingCondition.CODEC);
+        CONDITION_CODECS.register("rift_shard_crafting", () -> RiftShardCraftingCondition.CODEC);
     }
 
     public NetherOverhaul(IEventBus modBus, ModContainer container) {
         CHUNK_GENERATORS.register(modBus);
         BIOME_SOURCES.register(modBus);
         CONDITION_CODECS.register(modBus);
+        ModDataComponents.COMPONENTS.register(modBus);
         ModBlocks.BLOCKS.register(modBus);
         ModEntities.ENTITIES.register(modBus);
         ModItems.ITEMS.register(modBus);

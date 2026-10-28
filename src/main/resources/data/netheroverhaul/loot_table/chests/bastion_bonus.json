@@ -3,13 +3,55 @@
   "pools": [
     {
       "rolls": 1,
-      "conditions": [{ "condition": "minecraft:random_chance", "chance": 0.06 }],
-      "entries": [{ "type": "minecraft:item", "name": "netheroverhaul:rift_key" }]
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.06
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:rift_key"
+        }
+      ]
     },
     {
       "rolls": 1,
-      "conditions": [{ "condition": "minecraft:random_chance", "chance": 0.12 }],
-      "entries": [{ "type": "minecraft:item", "name": "netheroverhaul:recall_charm" }]
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.12
+        }
+      ],
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:recall_charm"
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:rift_shard",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1,
+              "add": false
+            }
+          ]
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.12
+        }
+      ]
     }
   ]
 }

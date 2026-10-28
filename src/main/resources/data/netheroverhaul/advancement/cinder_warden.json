@@ -1,0 +1,16 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "minecraft:blaze_rod" },
+    "title": "Tend the Pyre",
+    "description": "Defeat a Cinder Warden at an ash pyre.",
+    "frame": "goal",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "done": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "parent": "netheroverhaul:root",
+  "display": {
+    "icon": { "id": "netheroverhaul:rift_shard" },
+    "title": "A Piece of the Seal",
+    "description": "Find a rift shard. Four of them, around crying obsidian, assemble a Rift Key.",
+    "frame": "task",
+    "show_toast": true,
+    "announce_to_chat": true
+  },
+  "criteria": {
+    "has_shard": {
+      "trigger": "minecraft:inventory_changed",
+      "conditions": {
+        "items": [
+          { "items": "netheroverhaul:rift_shard" }
+        ]
+      }
+    }
+  }
+}
