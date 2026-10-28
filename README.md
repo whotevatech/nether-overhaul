@@ -57,7 +57,7 @@ A Rift Key can also be crafted from a nether star, ghast tear, two eyes of ender
 gradlew.bat build
 ```
 
-The jar lands in `build/libs/netheroverhaul-neoforge-1.21.1-1.4.0.jar`.
+The jar lands in `build/libs/netheroverhaul-neoforge-1.21.1-1.4.1.jar`.
 
 ## Licence
 

@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.4.1
+
+- Structure signs no longer crash chunk generation. Camp and hamlet signs write their text through the sign's NBT load path while the block entity is still unattached, instead of `setText`, which calls `markUpdated` and NPEs when `level` is null.
+
 ## 1.4.0
 
 - Spawn camp is a finished shelter: brick walls, crimson posts, gilded trim, stair eaves, lectern with the lore book, smithing table, smoker, anvil, charged respawn anchor, fenced mature wart and a glowstone berry, yard banner and lantern posts. The starter chest always has food, a stone shovel, a golden pick, shears, bone meal and a mushroom stew kit.
