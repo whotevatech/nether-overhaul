@@ -3,6 +3,7 @@ package dev.whoteva.netheroverhaul.command;
 import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.context.CommandContext;
 import dev.whoteva.netheroverhaul.ModAttachments;
+import dev.whoteva.netheroverhaul.NetherOverhaulConfig;
 import dev.whoteva.netheroverhaul.item.ModItems;
 import dev.whoteva.netheroverhaul.worldgen.NetherSpawn;
 import dev.whoteva.netheroverhaul.worldgen.NetherStructureLayout;
@@ -54,8 +55,10 @@ public final class ModCommands {
                         .then(Commands.literal("well").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.WELL)))
                         .then(Commands.literal("dungeon").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.DUNGEON)))
                         .then(Commands.literal("ring").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.RING)))
+                        .then(Commands.literal("pyre").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.RING)))
                         .then(Commands.literal("blaze").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.BLAZE)))
-                        .then(Commands.literal("firetower").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.FIRE_TOWER))))
+                        .then(Commands.literal("firetower").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.FIRE_TOWER)))
+                        .then(Commands.literal("altar").executes(ctx -> locate(ctx.getSource().getPlayerOrException(), NetherStructureLayout.Kind.ALTAR))))
                 .then(Commands.literal("key")
                         .requires(source -> source.hasPermission(2))
                         .executes(ctx -> give(ctx.getSource().getPlayerOrException(), new ItemStack(ModItems.RIFT_KEY.get()))))
@@ -76,7 +79,7 @@ public final class ModCommands {
         boolean unlocked = ModAttachments.isUnlocked(player);
         player.displayClientMessage(Component.translatable(
                 unlocked ? "command.netheroverhaul.where_open" : "command.netheroverhaul.where_sealed"), false);
-        NetherStructureLayout.Hit hit = NetherStructureLayout.nearest(player.blockPosition(), null, 48);
+        NetherStructureLayout.Hit hit = NetherStructureLayout.nearest(player.blockPosition(), null, NetherOverhaulConfig.SEEKER_RANGE_CHUNKS.get());
         if (hit != null) {
             player.displayClientMessage(Component.literal(hit.describe(player.blockPosition())), false);
         }
@@ -84,7 +87,7 @@ public final class ModCommands {
     }
 
     private static int locate(ServerPlayer player, NetherStructureLayout.Kind kind) {
-        NetherStructureLayout.Hit hit = NetherStructureLayout.nearest(player.blockPosition(), kind, 64);
+        NetherStructureLayout.Hit hit = NetherStructureLayout.nearest(player.blockPosition(), kind, Math.max(64, NetherOverhaulConfig.SEEKER_RANGE_CHUNKS.get()));
         if (hit == null) {
             player.displayClientMessage(Component.translatable("message.netheroverhaul.seeker_none"), false);
             return 0;
@@ -96,6 +99,7 @@ public final class ModCommands {
 
     private static int kit(ServerPlayer player) {
         give(player, new ItemStack(ModItems.RIFT_KEY.get()));
+        give(player, new ItemStack(ModItems.RIFT_SHARD.get(), 4));
         give(player, new ItemStack(ModItems.RIFT_SEEKER.get()));
         give(player, new ItemStack(ModItems.RECALL_CHARM.get()));
         give(player, new ItemStack(ModItems.SEALED_FLASK.get()));

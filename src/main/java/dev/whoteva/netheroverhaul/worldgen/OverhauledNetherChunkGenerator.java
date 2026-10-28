@@ -268,6 +268,8 @@ public class OverhauledNetherChunkGenerator extends ChunkGenerator {
                     }
                     if (random.nextFloat() < 0.12F) {
                         NetherStructures.placeGlowstoneBerryBush(level, cursor.immutable(), random);
+                    } else if (path.equals("wither_ruins") && random.nextFloat() < 0.06F) {
+                        NetherStructures.placeBoneRib(level, cursor.immutable());
                     } else if (path.equals("wither_ruins") && random.nextFloat() < 0.08F) {
                         NetherStructures.placeWitherTree(level, cursor.immutable(), random);
                     } else if (random.nextFloat() < 0.4F) {
@@ -287,25 +289,45 @@ public class OverhauledNetherChunkGenerator extends ChunkGenerator {
                     }
                 }
                 case "quartz_peaks" -> {
-                    if (random.nextFloat() < 0.12F) {
+                    if (random.nextFloat() < 0.1F) {
                         NetherStructures.placeGlowstoneTree(level, cursor.immutable(), random);
+                    } else if (random.nextFloat() < 0.08F) {
+                        NetherStructures.placeQuartzSpike(level, cursor.immutable(), random);
                     } else if (random.nextFloat() < 0.35F) {
                         level.setBlock(cursor.below(), Blocks.QUARTZ_BLOCK.defaultBlockState(), 2);
                     }
                 }
-                case "ashen_swamp", "weeping_hollow" -> {
-                    if (random.nextFloat() < 0.1F) {
+                case "ashen_swamp" -> {
+                    if (random.nextFloat() < 0.14F) {
+                        level.setBlock(cursor.below(), ModBlocks.QUICK_SOUL_SAND.get().defaultBlockState(), 2);
+                    }
+                    if (random.nextFloat() < 0.12F) {
                         NetherStructures.placeGlowstoneBerryBush(level, cursor.immutable(), random);
+                    } else if (random.nextFloat() < 0.2F) {
+                        level.setBlock(cursor, Blocks.BROWN_MUSHROOM.defaultBlockState(), 2);
+                    } else if (random.nextFloat() < 0.15F) {
+                        level.setBlock(cursor.below(), Blocks.SOUL_SOIL.defaultBlockState(), 2);
+                        level.setBlock(cursor, Blocks.NETHER_SPROUTS.defaultBlockState(), 2);
+                    }
+                }
+                case "weeping_hollow" -> {
+                    if (random.nextFloat() < 0.12F) {
+                        NetherStructures.placeGlowstoneBerryBush(level, cursor.immutable(), random);
+                    } else if (random.nextFloat() < 0.2F) {
+                        level.setBlock(cursor, Blocks.CRIMSON_ROOTS.defaultBlockState(), 2);
+                    } else if (random.nextFloat() < 0.08F) {
+                        level.setBlock(cursor.below(), Blocks.NETHER_WART_BLOCK.defaultBlockState(), 2);
                     } else {
-                        level.setBlock(cursor, random.nextBoolean()
-                                ? Blocks.RED_MUSHROOM.defaultBlockState()
-                                : Blocks.BROWN_MUSHROOM.defaultBlockState(), 2);
+                        level.setBlock(cursor, Blocks.RED_MUSHROOM.defaultBlockState(), 2);
                     }
                 }
                 case "ember_fields" -> {
-                    if (random.nextFloat() < 0.35F) {
+                    if (random.nextFloat() < 0.3F) {
                         level.setBlock(cursor.below(), Blocks.MAGMA_BLOCK.defaultBlockState(), 2);
+                    } else if (random.nextFloat() < 0.08F) {
+                        level.setBlock(cursor.below(), Blocks.GILDED_BLACKSTONE.defaultBlockState(), 2);
                     } else if (random.nextFloat() < 0.2F) {
+                        level.setBlock(cursor.below(), Blocks.NETHERRACK.defaultBlockState(), 2);
                         level.setBlock(cursor, Blocks.FIRE.defaultBlockState(), 2);
                     }
                 }
@@ -405,10 +427,6 @@ public class OverhauledNetherChunkGenerator extends ChunkGenerator {
             return;
         }
 
-        int towerEvery = NetherOverhaulConfig.TOWER_SPACING.get();
-        int hamletEvery = NetherOverhaulConfig.HAMLET_SPACING.get();
-        int ruinEvery = NetherOverhaulConfig.RUIN_SPACING.get();
-
         NetherStructureLayout.Kind kind = NetherStructureLayout.kindAt(pos);
         if (kind == null) {
             return;
@@ -422,9 +440,10 @@ public class OverhauledNetherChunkGenerator extends ChunkGenerator {
             case SHRINE -> NetherStructures.placeQuartzShrine(level, origin, random, seed + 23);
             case WELL -> NetherStructures.placeObsidianWell(level, origin, random, seed + 29);
             case DUNGEON -> NetherStructures.placeNetherDungeon(level, origin, random, seed + 31);
-            case RING -> NetherStructures.placeFireRing(level, origin, random);
+            case RING -> NetherStructures.placeFireRing(level, origin, random, seed + 41);
             case BLAZE -> NetherStructures.placeBlazeTower(level, origin, random, seed + 37);
-            case FIRE_TOWER -> NetherStructures.placeFireTower(level, origin, random);
+            case FIRE_TOWER -> NetherStructures.placeFireTower(level, origin, random, seed + 43);
+            case ALTAR -> NetherStructures.placeRiftAltar(level, origin, random, seed + 47);
         }
     }
 

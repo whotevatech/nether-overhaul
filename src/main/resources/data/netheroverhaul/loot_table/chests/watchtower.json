@@ -4,10 +4,42 @@
     {
       "rolls": 1,
       "entries": [
-        { "type": "minecraft:item", "name": "netheroverhaul:rift_key" }
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:rift_shard",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 2
+              },
+              "add": false
+            }
+          ]
+        }
       ],
       "conditions": [
-        { "condition": "minecraft:random_chance", "chance": 0.18 }
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.3
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "netheroverhaul:rift_key"
+        }
+      ],
+      "conditions": [
+        {
+          "condition": "minecraft:random_chance",
+          "chance": 0.18
+        }
       ]
     },
     {
@@ -22,7 +54,15 @@
           "name": "minecraft:gold_ingot",
           "weight": 10,
           "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 4 }, "add": false }
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 4
+              },
+              "add": false
+            }
           ]
         },
         {
@@ -30,7 +70,15 @@
           "name": "minecraft:quartz",
           "weight": 8,
           "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 8 }, "add": false }
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 8
+              },
+              "add": false
+            }
           ]
         },
         {
@@ -38,7 +86,15 @@
           "name": "minecraft:arrow",
           "weight": 6,
           "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 8, "max": 16 }, "add": false }
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 8,
+                "max": 16
+              },
+              "add": false
+            }
           ]
         },
         {
@@ -46,7 +102,15 @@
           "name": "minecraft:iron_ingot",
           "weight": 5,
           "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 1, "max": 3 }, "add": false }
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 1,
+                "max": 3
+              },
+              "add": false
+            }
           ]
         },
         {
@@ -59,7 +123,15 @@
           "name": "minecraft:obsidian",
           "weight": 4,
           "functions": [
-            { "function": "minecraft:set_count", "count": { "type": "minecraft:uniform", "min": 2, "max": 5 }, "add": false }
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "type": "minecraft:uniform",
+                "min": 2,
+                "max": 5
+              },
+              "add": false
+            }
           ]
         }
       ]

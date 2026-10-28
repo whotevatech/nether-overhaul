@@ -16,6 +16,8 @@ public final class ModLoot {
     public static final ResourceKey<LootTable> WELL = key("chests/obsidian_well");
     public static final ResourceKey<LootTable> DUNGEON = key("chests/nether_dungeon");
     public static final ResourceKey<LootTable> BLAZE_TOWER = key("chests/blaze_tower");
+    public static final ResourceKey<LootTable> FIRE_TOWER = key("chests/fire_tower");
+    public static final ResourceKey<LootTable> ASH_PYRE = key("chests/ash_pyre");
     public static final ResourceKey<LootTable> RIFT_CACHE = key("chests/rift_cache");
     public static final ResourceKey<LootTable> FORTRESS_BONUS = key("chests/fortress_bonus");
     public static final ResourceKey<LootTable> BASTION_BONUS = key("chests/bastion_bonus");

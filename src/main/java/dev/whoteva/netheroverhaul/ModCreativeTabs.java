@@ -20,6 +20,7 @@ public final class ModCreativeTabs {
                     .icon(() -> ModItems.RIFT_KEY.get().getDefaultInstance())
                     .displayItems((params, output) -> {
                         output.accept(ModItems.RIFT_KEY.get());
+                        output.accept(ModItems.RIFT_SHARD.get());
                         output.accept(ModItems.RIFT_SEEKER.get());
                         output.accept(ModItems.RECALL_CHARM.get());
                         output.accept(ModItems.SEALED_FLASK.get());
@@ -42,6 +43,7 @@ public final class ModCreativeTabs {
     public static void buildContents(BuildCreativeModeTabContentsEvent event) {
         if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             event.accept(ModItems.RIFT_KEY.get());
+            event.accept(ModItems.RIFT_SHARD.get());
             event.accept(ModItems.RIFT_SEEKER.get());
             event.accept(ModItems.RECALL_CHARM.get());
             event.accept(ModItems.SEALED_FLASK.get());

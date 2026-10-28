@@ -35,21 +35,28 @@ public final class ModItems {
             "sealed_flask",
             () -> new SealedFlaskItem(new Item.Properties().stacksTo(1).rarity(Rarity.UNCOMMON).fireResistant()));
 
+    public static final DeferredHolder<Item, RiftShardItem> RIFT_SHARD = ITEMS.register(
+            "rift_shard",
+            () -> new RiftShardItem(new Item.Properties().rarity(Rarity.UNCOMMON).fireResistant()));
+
     public static final DeferredItem<Item> GLOWSTONE_SEED = ITEMS.register(
             "glowstone_seed",
             () -> new ItemNameBlockItem(ModBlocks.GLOWSTONE_CROP.get(), new Item.Properties()));
 
-    public static final DeferredItem<Item> GLOWSTONE_BERRY = ITEMS.register(
+    public static final DeferredItem<GlowstoneBerryItem> GLOWSTONE_BERRY = ITEMS.register(
             "glowstone_berry",
-            () -> new Item(new Item.Properties().food(new FoodProperties.Builder()
-                    .nutrition(4)
+            () -> new GlowstoneBerryItem(new Item.Properties().food(new FoodProperties.Builder()
+                    .nutrition(3)
                     .saturationModifier(0.4F)
                     .alwaysEdible()
-                    .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 200, 0), 1.0F)
+                    .fast()
+                    .effect(() -> new MobEffectInstance(MobEffects.GLOWING, 600, 0), 1.0F)
+                    .effect(() -> new MobEffectInstance(MobEffects.NIGHT_VISION, 400, 0), 1.0F)
                     .build())));
 
-    public static final DeferredItem<BlockItem> QUICK_SOUL_SAND = ITEMS.registerSimpleBlockItem(
-            "quick_soul_sand", ModBlocks.QUICK_SOUL_SAND);
+    public static final DeferredItem<QuickSoulSandItem> QUICK_SOUL_SAND = ITEMS.register(
+            "quick_soul_sand",
+            () -> new QuickSoulSandItem(ModBlocks.QUICK_SOUL_SAND.get(), new Item.Properties()));
 
     public static final DeferredItem<BlockItem> NETHER_IRON_ORE = ITEMS.registerSimpleBlockItem(
             "nether_iron_ore", ModBlocks.NETHER_IRON_ORE);
@@ -65,15 +72,15 @@ public final class ModItems {
 
     public static final DeferredItem<SpawnEggItem> NETHER_CREEPER_EGG = ITEMS.register(
             "nether_creeper_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.NETHER_CREEPER.get(), 0x4A1C12, 0xE07020, new Item.Properties()));
+            () -> new SpawnEggItem(ModEntities.NETHER_CREEPER.get(), 0x3A1E1A, 0xFF6A1A, new Item.Properties()));
 
     public static final DeferredItem<SpawnEggItem> NETHER_SPIDER_EGG = ITEMS.register(
             "nether_spider_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.NETHER_SPIDER.get(), 0x2A1010, 0xC04018, new Item.Properties()));
+            () -> new SpawnEggItem(ModEntities.NETHER_SPIDER.get(), 0x2C1214, 0xE25822, new Item.Properties()));
 
     public static final DeferredItem<SpawnEggItem> NETHER_ZOMBIE_EGG = ITEMS.register(
             "nether_zombie_spawn_egg",
-            () -> new SpawnEggItem(ModEntities.NETHER_ZOMBIE.get(), 0x3A2A18, 0x8A5A28, new Item.Properties()));
+            () -> new SpawnEggItem(ModEntities.NETHER_ZOMBIE.get(), 0x4A2A24, 0xC45A32, new Item.Properties()));
 
     private ModItems() {
     }

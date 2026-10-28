@@ -34,6 +34,12 @@ public final class ModAttachments {
     public static final DeferredHolder<AttachmentType<?>, AttachmentType<Long>> LAST_LOCK_MESSAGE =
             ATTACHMENTS.register("last_lock_message", () -> AttachmentType.builder(() -> 0L).build());
 
+    public static final DeferredHolder<AttachmentType<?>, AttachmentType<KeptGear>> KEPT_GEAR =
+            ATTACHMENTS.register("kept_gear", () -> AttachmentType.builder(() -> KeptGear.EMPTY)
+                    .serialize(KeptGear.CODEC)
+                    .copyOnDeath()
+                    .build());
+
     private ModAttachments() {
     }
 

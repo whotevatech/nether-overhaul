@@ -5,7 +5,7 @@
       "id": "netheroverhaul:rift_key"
     },
     "title": "Key to the Rift",
-    "description": "Find a Rift Key in a watchtower, hamlet or wither-ruin pit.",
+    "description": "Hold a Rift Key. Altars keep a finished one. Four rift shards can assemble another.",
     "frame": "goal",
     "show_toast": true,
     "announce_to_chat": true

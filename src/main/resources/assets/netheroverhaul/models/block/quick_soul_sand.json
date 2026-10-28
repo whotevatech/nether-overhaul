@@ -1,4 +1,4 @@
 {
   "parent": "minecraft:block/cube_all",
-  "textures": { "all": "minecraft:block/soul_sand" }
+  "textures": { "all": "netheroverhaul:block/quick_soul_sand" }
 }

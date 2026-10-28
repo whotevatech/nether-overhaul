@@ -58,5 +58,11 @@ public class RiftKeyItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, Item.TooltipContext context, List<Component> tooltip, TooltipFlag flag) {
         tooltip.add(Component.translatable("item.netheroverhaul.rift_key.desc").withStyle(ChatFormatting.GRAY));
+        tooltip.add(Component.translatable("item.netheroverhaul.rift_key.hint").withStyle(ChatFormatting.DARK_GRAY));
+    }
+
+    @Override
+    public boolean isFoil(ItemStack stack) {
+        return true;
     }
 }

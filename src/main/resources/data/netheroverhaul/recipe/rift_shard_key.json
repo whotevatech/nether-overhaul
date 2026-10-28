@@ -1,0 +1,22 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "neoforge:conditions": [
+    {
+      "type": "netheroverhaul:rift_shard_crafting"
+    }
+  ],
+  "category": "misc",
+  "pattern": [
+    " S ",
+    "SCS",
+    " S "
+  ],
+  "key": {
+    "S": { "item": "netheroverhaul:rift_shard" },
+    "C": { "item": "minecraft:crying_obsidian" }
+  },
+  "result": {
+    "id": "netheroverhaul:rift_key",
+    "count": 1
+  }
+}

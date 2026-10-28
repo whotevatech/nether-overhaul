@@ -2,7 +2,9 @@ package dev.whoteva.netheroverhaul.block;
 
 import com.mojang.serialization.MapCodec;
 import net.minecraft.core.BlockPos;
+import dev.whoteva.netheroverhaul.event.QolEvents;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.BlockGetter;
@@ -51,6 +53,9 @@ public class QuickSoulSandBlock extends Block {
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
         entity.makeStuckInBlock(state, new Vec3(0.25D, 0.05D, 0.25D));
+        if (!level.isClientSide && entity instanceof ServerPlayer player) {
+            QolEvents.award(player, "quick_soul");
+        }
     }
 
     @Override
@@ -63,6 +68,16 @@ public class QuickSoulSandBlock extends Block {
                     pos.getZ() + random.nextDouble(),
                     0.0D,
                     0.04D,
+                    0.0D);
+        }
+        if (random.nextInt(5) == 0) {
+            level.addParticle(
+                    ParticleTypes.WHITE_ASH,
+                    pos.getX() + random.nextDouble(),
+                    pos.getY() + 1.0D,
+                    pos.getZ() + random.nextDouble(),
+                    0.0D,
+                    0.02D,
                     0.0D);
         }
     }

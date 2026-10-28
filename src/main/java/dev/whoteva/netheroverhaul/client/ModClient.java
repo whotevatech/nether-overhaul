@@ -6,6 +6,7 @@ import net.minecraft.client.renderer.entity.CreeperRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.entity.SpiderRenderer;
 import net.minecraft.client.renderer.entity.ZombieRenderer;
+import net.minecraft.client.renderer.entity.layers.SpiderEyesLayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.monster.Creeper;
 import net.minecraft.world.entity.monster.Spider;
@@ -46,6 +47,7 @@ public final class ModClient {
 
         public NetherSpiderRenderer(EntityRendererProvider.Context context) {
             super(context);
+            this.layers.removeIf(layer -> layer instanceof SpiderEyesLayer);
         }
 
         @Override
