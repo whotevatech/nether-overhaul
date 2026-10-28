@@ -7,8 +7,11 @@ import dev.whoteva.netheroverhaul.block.ModBlocks;
 import dev.whoteva.netheroverhaul.entity.ModEntities;
 import dev.whoteva.netheroverhaul.item.ModItems;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
+import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtOps;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
@@ -68,8 +71,12 @@ import net.minecraft.world.level.block.state.properties.DoorHingeSide;
 import net.minecraft.world.level.block.state.properties.Half;
 import net.minecraft.world.level.storage.loot.LootTable;
 import net.minecraft.server.level.ServerLevel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class NetherStructures {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger("netheroverhaul");
 
     private NetherStructures() {
     }
@@ -1081,17 +1088,31 @@ public final class NetherStructures {
     }
 
     private static void writeSign(WorldGenLevel level, BlockPos pos, String line0, String line1, String line2, String line3) {
-        if (level.getBlockEntity(pos) instanceof SignBlockEntity sign) {
-            SignText text = new SignText()
-                    .setMessage(0, Component.literal(line0))
-                    .setMessage(1, Component.literal(line1))
-                    .setMessage(2, Component.literal(line2))
-                    .setMessage(3, Component.literal(line3))
-                    .setColor(DyeColor.ORANGE)
-                    .setHasGlowingText(true);
+        if (!(level.getBlockEntity(pos) instanceof SignBlockEntity sign)) {
+            return;
+        }
+        SignText text = new SignText()
+                .setMessage(0, Component.literal(line0))
+                .setMessage(1, Component.literal(line1))
+                .setMessage(2, Component.literal(line2))
+                .setMessage(3, Component.literal(line3))
+                .setColor(DyeColor.ORANGE)
+                .setHasGlowingText(true);
+        // During chunk generation the block entity is not attached yet. setText and setWaxed
+        // both call markUpdated, which NPEs when SignBlockEntity.level is null.
+        if (sign.getLevel() != null) {
             sign.setText(text, true);
             sign.setWaxed(true);
+            return;
         }
+        HolderLookup.Provider registries = level.getLevel().registryAccess();
+        CompoundTag tag = new CompoundTag();
+        SignText.DIRECT_CODEC
+                .encodeStart(registries.createSerializationContext(NbtOps.INSTANCE), text)
+                .resultOrPartial(error -> LOGGER.warn("Failed to encode structure sign at {}: {}", pos, error))
+                .ifPresent(encoded -> tag.put("front_text", encoded));
+        tag.putBoolean("is_waxed", true);
+        sign.loadCustomOnly(tag, registries);
     }
 
     private static void placeChest(WorldGenLevel level, BlockPos pos, long lootSeed, ResourceKey<LootTable> table) {
